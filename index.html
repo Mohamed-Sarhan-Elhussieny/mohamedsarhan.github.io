@@ -1,1828 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Sarhan EL-hussieny - Azure Solution Architect</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Enhanced Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            opacity: 0.15;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #3498db, rgba(52, 152, 219, 0.3), transparent);
-            border-radius: 50%;
-            animation: floatBubble1 25s infinite linear;
-            filter: blur(2px);
-        }
-
-        .bg-animation::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #e74c3c, rgba(231, 76, 60, 0.4), transparent);
-            border-radius: 50%;
-            top: 60%;
-            left: 80%;
-            animation: floatBubble2 30s infinite linear;
-            filter: blur(1px);
-        }
-
-        /* Floating Geometric Shapes */
-        .geometric-shapes {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .geo-shape {
-            position: absolute;
-            border: 2px solid #3498db;
-            animation: geometricFloat 20s ease-in-out infinite;
-        }
-
-        .geo-shape:nth-child(1) {
-            width: 50px;
-            height: 50px;
-            top: 20%;
-            left: 10%;
-            border-radius: 50%;
-            animation-delay: 0s;
-            animation-duration: 15s;
-        }
-
-        .geo-shape:nth-child(2) {
-            width: 40px;
-            height: 40px;
-            top: 50%;
-            right: 15%;
-            animation-delay: 5s;
-            animation-duration: 18s;
-        }
-
-        .geo-shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            bottom: 30%;
-            left: 20%;
-            border-radius: 30%;
-            animation-delay: 10s;
-            animation-duration: 22s;
-        }
-
-        .geo-shape:nth-child(4) {
-            width: 35px;
-            height: 35px;
-            top: 70%;
-            right: 30%;
-            transform: rotate(45deg);
-            animation-delay: 3s;
-            animation-duration: 16s;
-        }
-
-        @keyframes geometricFloat {
-            0%, 100% { 
-                transform: translate(0, 0) rotate(0deg) scale(1); 
-                opacity: 0.1;
-            }
-            25% { 
-                transform: translate(-30px, -40px) rotate(90deg) scale(1.2); 
-                opacity: 0.3;
-            }
-            50% { 
-                transform: translate(20px, -20px) rotate(180deg) scale(0.8); 
-                opacity: 0.15;
-            }
-            75% { 
-                transform: translate(40px, 30px) rotate(270deg) scale(1.1); 
-                opacity: 0.25;
-            }
-        }
-
-        /* Particle System */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #3498db;
-            border-radius: 50%;
-            animation: particleFloat 25s infinite linear;
-            opacity: 0.6;
-        }
-
-        .particle:nth-child(odd) {
-            background: #e74c3c;
-            animation-duration: 20s;
-        }
-
-        .particle:nth-child(3n) {
-            background: #f39c12;
-            animation-duration: 30s;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-10px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes floatBubble1 {
-            0% { transform: translateY(100vh) translateX(0px) rotate(0deg); }
-            50% { transform: translateY(-50vh) translateX(100px) rotate(180deg); }
-            100% { transform: translateY(-100px) translateX(-50px) rotate(360deg); }
-        }
-
-        @keyframes floatBubble2 {
-            0% { transform: translateX(-100px) translateY(0px) rotate(0deg); }
-            50% { transform: translateX(50vw) translateY(-100px) rotate(180deg); }
-            100% { transform: translateX(100vw) translateY(50px) rotate(-360deg); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cv-wrapper {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 
-                        inset 0 1px 0 rgba(255,255,255,0.2);
-            overflow: hidden;
-            min-height: 100vh;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: slideInUp 1.5s ease-out, glowPulse 4s ease-in-out infinite alternate;
-            transform-style: preserve-3d;
-            position: relative;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px) rotateX(-10deg) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg) scale(1);
-            }
-        }
-
-        @keyframes glowPulse {
-            from {
-                box-shadow: 0 30px 60px rgba(0,0,0,0.3), 
-                            0 0 0 rgba(52, 152, 219, 0.4),
-                            inset 0 1px 0 rgba(255,255,255,0.2);
-            }
-            to {
-                box-shadow: 0 30px 60px rgba(0,0,0,0.3), 
-                            0 0 30px rgba(52, 152, 219, 0.3),
-                            inset 0 1px 0 rgba(255,255,255,0.2);
-            }
-        }
-
-        /* Enhanced Floating Background Icons */
-        .bg-floating-icons {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .floating-icon {
-            position: absolute;
-            color: rgba(52, 152, 219, 0.15);
-            animation: floatIcon 20s infinite linear;
-            filter: blur(0.5px);
-        }
-
-        .floating-icon:nth-child(1) { 
-            top: 10%; left: 10%; 
-            animation-delay: 0s; 
-            animation-duration: 25s;
-        }
-        .floating-icon:nth-child(2) { 
-            top: 30%; right: 15%; 
-            animation-delay: 5s; 
-            animation-duration: 18s;
-        }
-        .floating-icon:nth-child(3) { 
-            bottom: 20%; left: 20%; 
-            animation-delay: 10s; 
-            animation-duration: 22s;
-        }
-        .floating-icon:nth-child(4) { 
-            top: 70%; right: 30%; 
-            animation-delay: 3s; 
-            animation-duration: 16s;
-        }
-        .floating-icon:nth-child(5) { 
-            bottom: 40%; left: 60%; 
-            animation-delay: 8s; 
-            animation-duration: 28s;
-        }
-        .floating-icon:nth-child(6) { 
-            top: 50%; right: 10%; 
-            animation-delay: 12s; 
-            animation-duration: 20s;
-        }
-
-        @keyframes floatIcon {
-            0% { 
-                transform: translateY(0) rotate(0deg) scale(1); 
-                opacity: 0.1; 
-            }
-            15% { 
-                opacity: 0.3; 
-            }
-            25% { 
-                transform: translateY(-40px) rotate(90deg) scale(1.2); 
-                opacity: 0.2; 
-            }
-            50% { 
-                transform: translateY(-20px) rotate(180deg) scale(0.9); 
-                opacity: 0.3; 
-            }
-            75% { 
-                transform: translateY(30px) rotate(270deg) scale(1.1); 
-                opacity: 0.15; 
-            }
-            85% { 
-                opacity: 0.25; 
-            }
-            100% { 
-                transform: translateY(0) rotate(360deg) scale(1); 
-                opacity: 0.1; 
-            }
-        }
-
-        /* Left Sidebar */
-        .sidebar {
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 30%, #3498db 60%, #2c3e50 100%);
-            color: #fff;
-            padding: 40px 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sidebar::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.2) 0%, transparent 70%);
-            animation: rotateBg 30s linear infinite;
-        }
-
-        .sidebar::after {
-            content: '';
-            position: absolute;
-            top: 20%;
-            right: -10%;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(231, 76, 60, 0.1), transparent);
-            border-radius: 50%;
-            animation: floatSidebarBubble 15s ease-in-out infinite;
-        }
-
-        @keyframes floatSidebarBubble {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(-20px, -30px) scale(1.2); }
-            50% { transform: translate(30px, -10px) scale(0.8); }
-            75% { transform: translate(-10px, 20px) scale(1.1); }
-        }
-
-        @keyframes rotateBg {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .profile-section {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Enhanced Profile Image with 3D Effects */
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #3498db, #2980b9, #e74c3c, #f39c12);
-            background-size: 400% 400%;
-            animation: gradientShift 6s ease infinite;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: #fff;
-            border: 4px solid #fff;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3), 
-                        0 0 0 10px rgba(52, 152, 219, 0.1),
-                        0 0 0 20px rgba(231, 76, 60, 0.05);
-            position: relative;
-            overflow: hidden;
-            transform: perspective(1000px) rotateX(0deg);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .profile-img:hover {
-            transform: perspective(1000px) rotateX(15deg) rotateY(15deg) scale(1.1);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.4), 
-                        0 0 0 15px rgba(52, 152, 219, 0.2),
-                        0 0 0 30px rgba(231, 76, 60, 0.1);
-        }
-
-        .profile-img::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 4s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        .profile-img-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .profile-cover {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3), 
-                        0 0 0 10px rgba(52, 152, 219, 0.1);
-            animation: profileFloat 8s ease-in-out infinite;
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .profile-cover:hover {
-            transform: scale(1.1) rotateZ(5deg);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4), 
-                        0 0 0 15px rgba(52, 152, 219, 0.2);
-        }
-
-        @keyframes profileFloat {
-            0%, 100% { transform: translateY(0px) rotateZ(0deg); }
-            25% { transform: translateY(-15px) rotateZ(3deg); }
-            50% { transform: translateY(-5px) rotateZ(-2deg); }
-            75% { transform: translateY(10px) rotateZ(-4deg); }
-        }
-
-        /* Enhanced Text Animations */
-        .profile-section h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            font-weight: 700;
-            animation: textGlow 3s ease-in-out infinite alternate,
-                       textBounce 6s ease-in-out infinite;
-            background: linear-gradient(45deg, #fff, #3498db, #fff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleGradient 6s ease-in-out infinite;
-        }
-
-        @keyframes titleGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -12px;
-            width: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #3498db, #2980b9, #e74c3c, #f39c12);
-            border-radius: 3px;
-            animation: expandLine 2s ease-out 0.8s forwards,
-                       lineGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes expandLine {
-            to { width: 120px; }
-        }
-
-        @keyframes lineGlow {
-            from { 
-                box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); 
-            }
-            to { 
-                box-shadow: 0 0 20px rgba(52, 152, 219, 0.8), 
-                            0 0 30px rgba(231, 76, 60, 0.3); 
-            }
-        }
-
-        /* Enhanced Profile Summary with Morphing Background */
-        .profile-summary {
-            font-size: 16px;
-            line-height: 1.9;
-            color: #555;
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15), rgba(46, 204, 113, 0.1));
-            background-size: 400% 400%;
-            animation: morphBackground 8s ease-in-out infinite;
-            padding: 35px;
-            border-radius: 20px;
-            border-left: 6px solid #3498db;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        @keyframes morphBackground {
-            0%, 100% { background-position: 0% 50%; }
-            25% { background-position: 100% 25%; }
-            50% { background-position: 100% 75%; }
-            75% { background-position: 0% 100%; }
-        }
-
-        .profile-summary::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.1), transparent 60%);
-            animation: rotateBackground 20s linear infinite;
-            z-index: -1;
-        }
-
-        .profile-summary::after {
-            content: '💡';
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 24px;
-            animation: bounce 3s ease-in-out infinite;
-        }
-
-        @keyframes rotateBackground {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(10deg); }
-            75% { transform: translateY(5px) rotate(-5deg); }
-        }
-
-        .profile-summary:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(52, 152, 219, 0.2);
-            border-left-width: 8px;
-        }
-
-        /* 3D Enhanced Items */
-        .experience-item, .education-item, .project-item {
-            margin-bottom: 35px;
-            position: relative;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-            border-radius: 20px;
-            border-left: 6px solid #3498db;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1),
-                        inset 0 1px 0 rgba(255,255,255,0.6);
-            transform-style: preserve-3d;
-        }
-
-        .experience-item::before, .education-item::before, .project-item::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 30px;
-            width: 16px;
-            height: 16px;
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            border-radius: 50%;
-            animation: pulse 3s infinite, glow 4s ease-in-out infinite alternate;
-            border: 3px solid #fff;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.4);
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 10px rgba(52, 152, 219, 0.4); }
-            to { box-shadow: 0 0 25px rgba(52, 152, 219, 0.8), 0 0 35px rgba(231, 76, 60, 0.3); }
-        }
-
-        .experience-item::after, .education-item::after, .project-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.05), transparent);
-            border-radius: 50%;
-            animation: floatCorner 12s ease-in-out infinite;
-        }
-
-        @keyframes floatCorner {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(-20px, 10px) scale(1.2); }
-            50% { transform: translate(-10px, -15px) scale(0.8); }
-            75% { transform: translate(15px, 20px) scale(1.1); }
-        }
-
-        .experience-item:hover, .education-item:hover, .project-item:hover {
-            transform: translateX(15px) translateY(-10px) rotateY(5deg) scale(1.02);
-            box-shadow: 0 25px 60px rgba(52, 152, 219, 0.25),
-                        inset 0 1px 0 rgba(255,255,255,0.8);
-            border-left-width: 8px;
-            border-left-color: #e74c3c;
-        }
-
-        /* Enhanced Item Titles */
-        .item-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 12px;
-            position: relative;
-            background: linear-gradient(45deg, #2c3e50, #3498db, #2c3e50);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleShimmer 4s ease-in-out infinite;
-        }
-
-        @keyframes titleShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .item-company {
-            font-size: 18px;
-            color: #3498db;
-            font-weight: 500;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .item-company:hover {
-            color: #e74c3c;
-            text-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
-            transform: translateX(5px);
-        }
-
-        /* 3D Date Pills */
-        .item-date {
-            background: linear-gradient(45deg, #3498db, #2980b9, #1abc9c);
-            background-size: 200% 200%;
-            animation: dateGradient 4s ease-in-out infinite;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3),
-                        inset 0 1px 0 rgba(255,255,255,0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform: perspective(100px) rotateX(0deg);
-        }
-
-        @keyframes dateGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .item-date:hover {
-            transform: perspective(100px) rotateX(-10deg) translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.4),
-                        inset 0 1px 0 rgba(255,255,255,0.5);
-        }
-
-        .item-date::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: dateShine 4s infinite;
-        }
-
-        @keyframes dateShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .item-description {
-            color: #666;
-            margin-top: 15px;
-            line-height: 1.8;
-        }
-
-        .item-description ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .item-description li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .item-description li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: #3498db;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-
-        .item-description li:hover {
-            transform: translateX(10px);
-            color: #3498db;
-        }
-
-        /* Enhanced Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe);
-            background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            animation: fadeOut 3s ease-out 2s forwards;
-        }
-
-        .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 6px solid rgba(255, 255, 255, 0.2);
-            border-top: 6px solid #fff;
-            border-right: 6px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            position: relative;
-        }
-
-        .loading-spinner::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: -6px;
-            right: -6px;
-            bottom: -6px;
-            border: 6px solid transparent;
-            border-top: 6px solid #e74c3c;
-            border-radius: 50%;
-            animation: spin 2s linear infinite reverse;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        /* Scroll Progress Bar Enhancement */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 6px;
-            background: linear-gradient(90deg, #3498db, #2980b9, #e74c3c, #f39c12);
-            background-size: 200% 100%;
-            animation: progressGradient 3s ease-in-out infinite;
-            z-index: 1000;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-        }
-
-        @keyframes progressGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Responsive Design Enhancements */
-        @media (max-width: 768px) {
-            .cv-wrapper {
-                grid-template-columns: 1fr;
-                margin: 10px;
-                border-radius: 20px;
-            }
-            
-            .sidebar {
-                order: 2;
-                padding: 30px 20px;
-            }
-            
-            .main-content {
-                order: 1;
-                padding: 30px 20px;
-            }
-
-            .profile-img, .profile-cover {
-                width: 120px;
-                height: 120px;
-            }
-
-            .section-title {
-                font-size: 26px;
-            }
-        }
-
-        /* Ultra Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: linear-gradient(180deg, #f1f1f1, #e1e1e1);
-            border-radius: 6px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #3498db, #2980b9);
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #e74c3c, #c0392b);
-            transform: scale(1.1);
-        }
-
-        /* Magnetic Cursor Effect */
-        .magnetic {
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Text Selection */
-        ::selection {
-            background: rgba(52, 152, 219, 0.3);
-            color: #2c3e50;
-        }
-
-        ::-moz-selection {
-            background: rgba(52, 152, 219, 0.3);
-            color: #2c3e50;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Sarhan - CV & Portfolio</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #0b1020;
+        color: #e5e7eb;
+        scroll-behavior: smooth;
+    }
+    header {
+        background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+        padding: 60px 20px;
+        text-align: center;
+        color: white;
+        position: relative;
+    }
+    header img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid white;
+        object-fit: cover;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+    header h1 {
+        margin-top: 15px;
+        font-size: 2.5rem;
+        animation: slideUp 1s ease forwards;
+    }
+    header p {
+        margin: 8px 0;
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+    nav {
+        position: sticky;
+        top: 0;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(8px);
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px 0;
+        z-index: 1000;
+    }
+    nav a {
+        color: #e5e7eb;
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+    }
+    nav a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -3px;
+        left: 0;
+        background: linear-gradient(90deg, #0ea5e9, #8b5cf6);
+        transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+        width: 100%;
+    }
+    section {
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 0 20px;
+        animation: fadeInUp 0.8s ease both;
+    }
+    h2 {
+        color: #38bdf8;
+        margin-bottom: 10px;
+        border-bottom: 2px solid rgba(255,255,255,0.1);
+        padding-bottom: 5px;
+    }
+    .card {
+        background: rgba(255,255,255,0.03);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .chips {
+        margin-top: 10px;
+    }
+    .chip {
+        display: inline-block;
+        background: rgba(255,255,255,0.1);
+        padding: 6px 10px;
+        border-radius: 20px;
+        margin: 4px;
+        font-size: 0.85rem;
+    }
+    img.certificate {
+        width: 100%;
+        max-width: 600px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    img.certificate:hover {
+        transform: scale(1.02);
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.6);
+        margin-top: 50px;
+    }
+    /* Animations */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+<script>
+    function viewCertificate(src) {
+        let overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.8)';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.zIndex = '2000';
+        overlay.innerHTML = `<img src="${src}" style="max-width:90%;max-height:90%;border-radius:8px;border:3px solid white;">`;
+        overlay.onclick = () => overlay.remove();
+        document.body.appendChild(overlay);
+    }
+</script>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay">
-        <div class="loading-spinner"></div>
+
+<header>
+    <img src="profile.png" alt="Profile Photo">
+    <h1>Mohamed Sarhan EL-hussieny</h1>
+    <p>Electronics & Communications Engineer | Azure Solution Architect | Linux & Networking</p>
+    <p>
+        <a href="mailto:mohamedsarhan976@gmail.com" style="color:white;">Email</a> |
+        <a href="https://wa.me/2001015860680" style="color:white;">WhatsApp</a> |
+        <a href="https://linkedin.com/in/mohamed-sarhan7" style="color:white;">LinkedIn</a> |
+        <a href="https://github.com/mohamed-sarhan" style="color:white;">GitHub</a>
+    </p>
+</header>
+
+<nav>
+    <a href="#profile">Profile</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#skills">Skills</a>
+</nav>
+
+<section id="profile">
+    <h2>Profile</h2>
+    <div class="card">
+        Electronics and Communications Engineering graduate with a strong foundation in cloud computing, IT infrastructure, and networking. Proficient in C, C++, and Python with hands-on experience in Azure cloud architecture, virtualization, and Linux administration.
     </div>
+</section>
 
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progressBar"></div>
-
-    <!-- Background Animations -->
-    <div class="bg-animation"></div>
-    
-    <!-- Geometric Shapes -->
-    <div class="geometric-shapes">
-        <div class="geo-shape"></div>
-        <div class="geo-shape"></div>
-        <div class="geo-shape"></div>
-        <div class="geo-shape"></div>
+<section id="experience">
+    <h2>Experience</h2>
+    <div class="card">
+        <b>Azure Solution Architect Intern</b> – Digital Egypt Pioneers Initiative (Apr 2024 – Oct 2024, Remote)
+        <ul>
+            <li>Designed and deployed secure Azure infrastructures.</li>
+            <li>Completed certifications: AZ-900, DP-900, AZ-104, AZ-305, AZ-500.</li>
+        </ul>
     </div>
-
-    <!-- Particles System -->
-    <div class="particles" id="particles"></div>
-
-    <div class="bg-floating-icons">
-        <div class="floating-icon" style="font-size: 40px;"><i class="fab fa-microsoft"></i></div>
-        <div class="floating-icon" style="font-size: 35px;"><i class="fas fa-cloud"></i></div>
-        <div class="floating-icon" style="font-size: 30px;"><i class="fas fa-code"></i></div>
-        <div class="floating-icon" style="font-size: 45px;"><i class="fas fa-server"></i></div>
-        <div class="floating-icon" style="font-size: 25px;"><i class="fas fa-database"></i></div>
-        <div class="floating-icon" style="font-size: 38px;"><i class="fas fa-shield-alt"></i></div>
+    <div class="card">
+        <b>Intensive IT Course</b> – Information Technology Institute (Jun 2024 – Aug 2024, Remote)
+        <ul>
+            <li>Networking, Linux Administration, Docker, Kubernetes.</li>
+        </ul>
     </div>
+</section>
 
-    <div class="container">
-        <div class="cv-wrapper">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <div class="profile-section">
-                    <div class="profile-img-container">
-                        <img src="cover.jpg" alt="Mohamed Sarhan" class="profile-cover" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="profile-img" style="display: none;">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <h1>Mohamed Sarhan EL-hussieny</h1>
-                    <div class="title">Azure Solution Architect & Electronics Engineer</div>
-                </div>
-
-                <div class="contact-info">
-                    <div class="contact-item magnetic">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:mohamedsarhan976@gmail.com">mohamedsarhan976@gmail.com</a>
-                    </div>
-                    <div class="contact-item magnetic">
-                        <i class="fas fa-phone"></i>
-                        <span>+20 01015860680</span>
-                    </div>
-                    <div class="contact-item magnetic">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Ismailia, Egypt</span>
-                    </div>
-                    <div class="contact-item magnetic">
-                        <i class="fab fa-linkedin"></i>
-                        <a href="https://linkedin.com/in/mohamed-sarhan7/" target="_blank">LinkedIn Profile</a>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3><i class="fas fa-code"></i> Technical Skills</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">Microsoft Azure</div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Python</div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">C++</div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="88%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Linux Administration</div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Cloud Architecture</div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3><i class="fas fa-language"></i> Languages</h3>
-                    <div class="language-item">
-                        <span>Arabic</span>
-                        <span class="language-level">Native</span>
-                    </div>
-                    <div class="language-item">
-                        <span>English</span>
-                        <span class="language-level">Professional</span>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3><i class="fas fa-trophy"></i> Soft Skills</h3>
-                    <div style="color: #ecf0f1; font-size: 14px;">
-                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Problem Solving</div>
-                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Team Leadership</div>
-                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Communication</div>
-                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Critical Thinking</div>
-                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Project Management</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="main-content">
-                <section class="section">
-                    <h2 class="section-title"><i class="fas fa-user-circle"></i> Professional Summary</h2>
-                    <div class="profile-summary">
-                        Experienced Azure Solution Architect and Electronics Engineer with a strong background in cloud infrastructure design, implementation, and optimization. Proficient in Microsoft Azure services, programming languages including Python and C++, and Linux system administration. Dedicated to delivering scalable, secure, and cost-effective cloud solutions that drive business innovation and growth.
-                    </div>
-                </section>
-
-                <section class="section">
-                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
-                    
-                    <div class="experience-item">
-                        <h3 class="item-title">Azure Solution Architect</h3>
-                        <div class="item-company">Tech Solutions Company</div>
-                        <span class="item-date">2023 - Present</span>
-                        <div class="item-description">
-                            <ul>
-                                <li>Design and implement comprehensive Azure cloud solutions for enterprise clients</li>
-                                <li>Lead migration projects from on-premises infrastructure to Azure cloud platforms</li>
-                                <li>Optimize cloud costs and performance through strategic resource management</li>
-                                <li>Collaborate with development teams to ensure cloud-native application architectures</li>
-                                <li>Provide technical guidance and mentorship to junior team members</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="item-title">Cloud Infrastructure Engineer</h3>
-                        <div class="item-company">Digital Innovation Corp</div>
-                        <span class="item-date">2022 - 2023</span>
-                        <div class="item-description">
-                            <ul>
-                                <li>Deployed and maintained Azure virtual machines, storage accounts, and networking components</li>
-                                <li>Implemented Infrastructure as Code using ARM templates and Terraform</li>
-                                <li>Monitored system performance and implemented automated scaling solutions</li>
-                                <li>Ensured compliance with security best practices and industry standards</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="item-title">Electronics Engineer</h3>
-                        <div class="item-company">Engineering Solutions Ltd</div>
-                        <span class="item-date">2021 - 2022</span>
-                        <div class="item-description">
-                            <ul>
-                                <li>Designed and developed embedded systems using C++ and Python</li>
-                                <li>Performed system testing and debugging for electronic control systems</li>
-                                <li>Collaborated with cross-functional teams on product development projects</li>
-                                <li>Documented technical specifications and maintained project documentation</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="section">
-                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-                    
-                    <div class="education-item">
-                        <h3 class="item-title">Bachelor of Engineering in Electronics</h3>
-                        <div class="item-company">Alexandria University</div>
-                        <span class="item-date">2017 - 2021</span>
-                        <div class="item-description">
-                            Graduated with honors, specializing in embedded systems, digital signal processing, and communication systems. Completed senior project on IoT-based monitoring systems using cloud integration.
-                        </div>
-                    </div>
-                </section>
-
-                <section class="section">
-                    <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications</h2>
-                    
-                    <div class="experience-item">
-                        <h3 class="item-title">Microsoft Azure Solutions Architect Expert</h3>
-                        <div class="item-company">Microsoft</div>
-                        <span class="item-date">2023</span>
-                        <div class="item-description">
-                            Advanced certification demonstrating expertise in designing and implementing solutions on Microsoft Azure platform.
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="item-title">Azure Fundamentals</h3>
-                        <div class="item-company">Microsoft</div>
-                        <span class="item-date">2022</span>
-                        <div class="item-description">
-                            Foundation-level certification covering core Azure services, security, privacy, compliance, and trust.
-                        </div>
-                    </div>
-                </section>
-
-                <section class="section">
-                    <h2 class="section-title"><i class="fas fa-project-diagram"></i> Key Projects</h2>
-                    
-                    <div class="project-item">
-                        <h3 class="item-title">Enterprise Cloud Migration</h3>
-                        <div class="item-company">Multi-tier Application Migration to Azure</div>
-                        <span class="item-date">2023</span>
-                        <div class="item-description">
-                            Led the migration of a complex multi-tier application from on-premises infrastructure to Azure, resulting in 40% cost reduction and improved scalability. Utilized Azure App Services, SQL Database, and Redis Cache.
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="item-title">IoT Monitoring System</h3>
-                        <div class="item-company">Industrial Equipment Monitoring</div>
-                        <span class="item-date">2022</span>
-                        <div class="item-description">
-                            Developed an IoT-based monitoring system for industrial equipment using Azure IoT Hub, Stream Analytics, and Power BI for real-time dashboards and predictive maintenance alerts.
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+<section id="projects">
+    <h2>Projects</h2>
+    <div class="card">
+        <b>Azure Cloud Infrastructure Deployment</b> – Built full Azure infrastructure for a web app with VMs, AD, SQL, and backups.
     </div>
+    <div class="card">
+        <b>Alexa Project</b> – Integrated Alexa features via Python scripting.
+    </div>
+</section>
 
-    <script>
-        // Initialize particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 25 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 20) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
+<section id="certifications">
+    <h2>Certifications</h2>
+    <div class="card">
+        Microsoft Certified: Azure Fundamentals (June 20, 2025) – Certificate No: C1733U-8DF16F
+        <br><br>
+        <img src="certificate.png" alt="Certificate" class="certificate" onclick="viewCertificate('certificate.png')">
+    </div>
+</section>
 
-        // Initialize skill bars animation
-        function animateSkillBars() {
-            const skillBars = document.querySelectorAll('.skill-progress');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const width = entry.target.getAttribute('data-width');
-                        entry.target.style.width = width;
-                    }
-                });
-            }, { threshold: 0.5 });
+<section id="skills">
+    <h2>Technical Skills</h2>
+    <div class="card chips">
+        <span class="chip">C</span>
+        <span class="chip">C++</span>
+        <span class="chip">Python</span>
+        <span class="chip">Azure</span>
+        <span class="chip">Linux</span>
+        <span class="chip">Networking</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Kubernetes</span>
+        <span class="chip">Git</span>
+    </div>
+</section>
 
-            skillBars.forEach(bar => observer.observe(bar));
-        }
+<footer>
+    © <span id="year"></span> Mohamed Sarhan. All rights reserved.
+</footer>
 
-        // Scroll progress bar
-        function updateProgressBar() {
-            const scrollProgress = document.getElementById('progressBar');
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const progress = (scrollTop / scrollHeight) * 100;
-            scrollProgress.style.width = progress + '%';
-        }
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
-        // Magnetic effect for interactive elements
-        function addMagneticEffect() {
-            const magneticElements = document.querySelectorAll('.magnetic');
-            
-            magneticElements.forEach(element => {
-                element.addEventListener('mousemove', (e) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    
-                    element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-                });
-                
-                element.addEventListener('mouseleave', () => {
-                    element.style.transform = 'translate(0px, 0px)';
-                });
-            });
-        }
-
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            animateSkillBars();
-            addMagneticEffect();
-            
-            // Update progress bar on scroll
-            window.addEventListener('scroll', updateProgressBar);
-            
-            // Remove loading overlay after animation
-            setTimeout(() => {
-                const loadingOverlay = document.querySelector('.loading-overlay');
-                if (loadingOverlay) {
-                    loadingOverlay.remove();
-                }
-            }, 5000);
-            
-            // Smooth scrolling for internal links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            
-            // Add intersection observer for fade-in animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0) rotateX(0deg)';
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe all sections
-            document.querySelectorAll('.section').forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Add hover sound effect (optional)
-            const playHoverSound = () => {
-                // Create audio context for subtle hover feedback
-                try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.1);
-                } catch (e) {
-                    // Audio not supported, continue without sound
-                }
-            };
-            
-            // Add subtle hover effects to interactive elements
-            document.querySelectorAll('.contact-item, .skill-item, .experience-item, .education-item, .project-item').forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    item.style.transform += ' scale(1.02)';
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    item.style.transform = item.style.transform.replace(' scale(1.02)', '');
-                });
-            });
-            
-            // Parallax effect for background elements
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
-                
-                document.querySelector('.bg-animation').style.transform = `translateY(${rate}px)`;
-                
-                // Update floating icons position based on scroll
-                document.querySelectorAll('.floating-icon').forEach((icon, index) => {
-                    const speed = 0.2 + (index * 0.1);
-                    icon.style.transform += ` translateY(${scrolled * speed}px)`;
-                });
-            });
-            
-            // Add typing effect to profile title
-            const titleElement = document.querySelector('.profile-section .title');
-            if (titleElement) {
-                const text = titleElement.textContent;
-                titleElement.textContent = '';
-                titleElement.style.borderRight = '3px solid #3498db';
-                
-                let i = 0;
-                const typeWriter = () => {
-                    if (i < text.length) {
-                        titleElement.textContent += text.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 100);
-                    } else {
-                        // Remove cursor after typing is complete
-                        setTimeout(() => {
-                            titleElement.style.borderRight = 'none';
-                        }, 2000);
-                    }
-                };
-                
-                // Start typing after a delay
-                setTimeout(typeWriter, 2000);
-            }
-            
-            // Enhanced skill bar animations with staggered timing
-            const skillProgress = document.querySelectorAll('.skill-progress');
-            skillProgress.forEach((bar, index) => {
-                setTimeout(() => {
-                    const width = bar.getAttribute('data-width');
-                    bar.style.width = width;
-                }, index * 200);
-            });
-            
-            // Add click ripple effect
-            function addRippleEffect(element, event) {
-                const ripple = document.createElement('div');
-                const rect = element.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = event.clientX - rect.left - size / 2;
-                const y = event.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(52, 152, 219, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    pointer-events: none;
-                `;
-                
-                element.style.position = 'relative';
-                element.style.overflow = 'hidden';
-                element.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            }
-            
-            // Add ripple effect to clickable items
-            document.querySelectorAll('.contact-item, .skill-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    addRippleEffect(item, e);
-                });
-            });
-            
-            // Performance optimization: Throttle scroll events
-            let ticking = false;
-            function updateOnScroll() {
-                updateProgressBar();
-                if (!ticking) {
-                    requestAnimationFrame(() => {
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }
-            
-            window.removeEventListener('scroll', updateProgressBar);
-            window.addEventListener('scroll', updateOnScroll, { passive: true });
-        });
-        
-        // Add CSS animation for ripple effect
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-            
-            /* Additional responsive improvements */
-            @media (max-width: 480px) {
-                .profile-section h1 {
-                    font-size: 20px;
-                }
-                
-                .profile-section .title {
-                    font-size: 14px;
-                    white-space: normal;
-                }
-                
-                .section-title {
-                    font-size: 22px;
-                }
-                
-                .item-title {
-                    font-size: 18px;
-                }
-                
-                .main-content, .sidebar {
-                    padding: 20px 15px;
-                }
-                
-                .experience-item, .education-item, .project-item {
-                    padding: 20px;
-                }
-            }
-            
-            /* Print styles */
-            @media print {
-                .loading-overlay,
-                .progress-bar,
-                .bg-animation,
-                .geometric-shapes,
-                .particles,
-                .bg-floating-icons {
-                    display: none !important;
-                }
-                
-                .cv-wrapper {
-                    box-shadow: none;
-                    border: 1px solid #ddd;
-                }
-                
-                .sidebar {
-                    background: #f8f9fa !important;
-                    color: #333 !important;
-                }
-                
-                .profile-section h1,
-                .sidebar-section h3 {
-                    color: #2c3e50 !important;
-                }
-                
-                .contact-item a {
-                    color: #333 !important;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes textGlow {
-            from { text-shadow: 0 0 10px rgba(52, 152, 219, 0.5); }
-            to { text-shadow: 0 0 25px rgba(52, 152, 219, 0.8), 0 0 35px rgba(231, 76, 60, 0.3); }
-        }
-
-        @keyframes textBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-2px); }
-        }
-
-        .profile-section .title {
-            font-size: 16px;
-            color: #ecf0f1;
-            margin-bottom: 20px;
-            font-weight: 300;
-            animation: typewriter 5s steps(45) 2s 1 normal both,
-                       titleGlow 4s ease-in-out infinite alternate;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid #3498db;
-        }
-
-        @keyframes titleGlow {
-            from { 
-                text-shadow: 0 0 5px rgba(236, 240, 241, 0.5); 
-            }
-            to { 
-                text-shadow: 0 0 15px rgba(236, 240, 241, 0.8), 
-                             0 0 25px rgba(52, 152, 219, 0.3); 
-            }
-        }
-
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        /* Enhanced Contact Items with Magnetic Effect */
-        .contact-info {
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 15px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .contact-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .contact-item::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.2), transparent);
-            border-radius: 50%;
-            transition: all 0.6s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .contact-item:hover::before {
-            left: 100%;
-        }
-
-        .contact-item:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .contact-item:hover {
-            transform: translateX(15px) translateY(-3px) scale(1.02);
-            background: rgba(52, 152, 219, 0.15);
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
-        }
-
-        .contact-item i {
-            width: 25px;
-            margin-right: 15px;
-            color: #3498db;
-            animation: pulse 3s infinite, iconRotate 6s ease-in-out infinite;
-            font-size: 18px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover i {
-            color: #fff;
-            transform: scale(1.2) rotate(360deg);
-        }
-
-        .contact-item a {
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item:hover a {
-            color: #fff;
-        }
-
-        @keyframes iconRotate {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-
-        /* Enhanced Skills Section */
-        .sidebar-section {
-            margin-bottom: 35px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .sidebar-section h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 8px;
-            position: relative;
-            animation: slideInLeft 0.8s ease-out forwards;
-            opacity: 0;
-            background: linear-gradient(45deg, #3498db, #2980b9, #3498db);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .sidebar-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #e74c3c, #f39c12);
-            animation: expandUnderline 2s ease-out 1s forwards;
-        }
-
-        @keyframes expandUnderline {
-            to { width: 60%; }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Enhanced Skill Items with 3D Progress Bars */
-        .skill-item {
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: slideInRight 0.8s ease-out forwards;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-item:hover {
-            transform: translateX(5px) scale(1.02);
-        }
-
-        .skill-item:nth-child(1) { animation-delay: 0.2s; }
-        .skill-item:nth-child(2) { animation-delay: 0.4s; }
-        .skill-item:nth-child(3) { animation-delay: 0.6s; }
-        .skill-item:nth-child(4) { animation-delay: 0.8s; }
-        .skill-item:nth-child(5) { animation-delay: 1.0s; }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .skill-name {
-            font-size: 14px;
-            margin-bottom: 12px;
-            font-weight: 500;
-            color: #ecf0f1;
-            text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
-        }
-
-        .skill-bar {
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #3498db, #2980b9, #e74c3c, #f39c12);
-            background-size: 200% 100%;
-            border-radius: 25px;
-            position: relative;
-            transition: width 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            overflow: hidden;
-            animation: skillGradient 4s ease-in-out infinite;
-        }
-
-        @keyframes skillGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .skill-progress::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
-            border-radius: 25px 25px 0 0;
-        }
-
-        .skill-progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-            animation: skillShine 3s infinite;
-        }
-
-        @keyframes skillShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Soft Skills */
-        .soft-skill {
-            transition: all 0.3s ease;
-        }
-
-        .soft-skill:hover {
-            background: rgba(52, 152, 219, 0.2);
-            transform: translateX(10px);
-            color: #fff;
-        }
-
-        /* Main Content Enhancements */
-        .main-content {
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-content::before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: floatParticle 15s infinite ease-in-out;
-        }
-
-        .main-content::after {
-            content: '';
-            position: absolute;
-            bottom: -10%;
-            left: -10%;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(231, 76, 60, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: floatParticle 18s infinite ease-in-out reverse;
-        }
-
-        @keyframes floatParticle {
-            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            25% { transform: translate(-30px, -40px) scale(1.1) rotate(90deg); }
-            50% { transform: translate(-60px, 20px) scale(0.9) rotate(180deg); }
-            75% { transform: translate(-20px, 60px) scale(1.2) rotate(270deg); }
-        }
-
-        /* Enhanced Sections */
-        .section {
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(40px) rotateX(-5deg);
-            animation: fadeInUp 1s ease-out forwards;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #3498db, transparent);
-            animation: sectionSweep 3s ease-in-out infinite;
-        }
-
-        @keyframes sectionSweep {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: -100%; }
-        }
-
-        .section:nth-child(1) { animation-delay: 0.3s; }
-        .section:nth-child(2) { animation-delay: 0.6s; }
-        .section:nth-child(3) { animation-delay: 0.9s; }
-        .section:nth-child(4) { animation-delay: 1.2s; }
-
-        .section:hover {
-            transform: translateY(-8px) rotateX(2deg);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px) rotateX(-5deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg);
-            }
-        }
-
-        /* Enhanced Section Titles */
-        .section-title {
-            font-size: 32px;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            position: relative;
-            font-weight: 700;
-            display: inline-block;
-            background: linear-gradient(45deg, #2c3e50, #3498db, #2c3e50);
-            background-size: 200% 200%;
