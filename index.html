@@ -3,64 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Sarhan's CV</title>
+    <title>Mohamed Sarhan - CV</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #f4f6f8;
             margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
+            padding: 0;
             color: #2c3e50;
         }
-        p {
-            line-height: 1.6;
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
         }
-        .section {
-            margin-bottom: 20px;
+        header {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            color: #3498db;
+        }
+        header p {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
         }
         ul {
             list-style-type: none;
             padding: 0;
         }
         li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
-        a {
+        .section p, li {
+            line-height: 1.6;
+        }
+        .contact a {
             color: #3498db;
             text-decoration: none;
+        }
+        .badge {
+            display: inline-block;
+            background: #eaf4fc;
+            color: #3498db;
+            padding: 5px 10px;
+            margin: 5px 5px 0 0;
+            border-radius: 20px;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Mohamed Sarhan</h1>
-            <p>Email: <a href="mailto:mohamed.sarhan@example.com">mohamed.sarhan@example.com</a> | Phone: +20-XXX-XXX-XXXX</p>
-            <p>Location: Cairo, Egypt</p>
+            <h1>Mohamed Sarhan EL-hussieny</h1>
+            <p>Ismailia, Egypt</p>
+            <p>📞 <a href="https://wa.me/2001015860680">+20 01015860680</a> | ✉ <a href="mailto:mohamedsarhan976@gmail.com">mohamedsarhan976@gmail.com</a></p>
+            <p>🔗 <a href="https://linkedin.com/in/mohamed-sarhan7/">LinkedIn</a> | <a href="https://github.com/mohamed-sarhan">GitHub</a></p>
         </header>
 
         <section class="section summary">
-            <h2>Summary</h2>
-            <p>I'm Mohamed Sarhan, a passionate Azure Solution Architect and Embedded Systems Developer with expertise in cloud computing, embedded technologies, and software development. I'm driven to solve complex problems with innovative solutions.</p>
+            <h2>Profile</h2>
+            <p>Electronics and Communications Engineering graduate with a strong foundation in cloud computing, IT infrastructure, and networking. Proficient in C, C++, and Python with hands-on experience in Azure cloud architecture, virtualization, and Linux administration. Certified in Azure Fundamentals and trained across several advanced Azure services.</p>
         </section>
 
-        <section class="section skills">
-            <h2>Skills</h2>
+        <section class="section education">
+            <h2>Education</h2>
             <ul>
-                <li>Azure Solution Architect</li>
-                <li>Embedded Systems (AVR, Raspberry Pi, ESP32)</li>
-                <li>C++, Python, Linux, Bash</li>
-                <li>Microcontroller Programming</li>
+                <li><strong>Bachelor of Engineering</strong>, Faculty of Engineering, Suez Canal University (2020 - 2025) <br>
+                Major: Communication and Electronics | GPA: 3.27 – Very Good | Graduation Project: Excellent</li>
             </ul>
         </section>
 
@@ -68,38 +91,61 @@
             <h2>Experience</h2>
             <ul>
                 <li>
-                    <h3>Azure Solution Architect Intern</h3>
-                    <p>Digital Egypt Pioneers Initiative (2024-Present)</p>
-                    <p>Working on Azure-based projects, enhancing infrastructure solutions, and completing certifications like AZ-305.</p>
+                    <strong>Azure Solution Architect Intern</strong> – Digital Egypt Pioneers Initiative (DEPI) <em>(Apr 2024 – Oct 2024, Remote)</em>
+                    <ul>
+                        <li>Designed, deployed, and managed Azure cloud solutions with focus on scalability and security.</li>
+                        <li>Completed certifications: AZ-900, DP-900, AZ-104, AZ-305, AZ-500.</li>
+                    </ul>
                 </li>
                 <li>
-                    <h3>Embedded Systems Developer</h3>
-                    <p>University Graduation Project (2024)</p>
-                    <p>Developed an Intelligent Agricultural Robotic System using Raspberry Pi and ATmega microcontrollers.</p>
+                    <strong>Intensive IT Course</strong> – Information Technology Institute (ITI) <em>(Jun 2024 – Aug 2024, Remote)</em>
+                    <ul>
+                        <li>Learned Networking concepts (OSI, TCP/IP, DNS, DHCP) and Linux Administration (RHEL, shell scripting).</li>
+                        <li>Worked with AWS basics, Docker, Kubernetes, and soft skills training.</li>
+                    </ul>
                 </li>
-            </ul>
-        </section>
-
-        <section class="section education">
-            <h2>Education</h2>
-            <ul>
-                <li><strong>Bachelor of Engineering in Electronics</strong> – Cairo University (2020-2024)</li>
+                <li>
+                    <strong>Intern</strong> – Suez Canal Authority <em>(Jul 2023 – Aug 2023)</em>
+                </li>
             </ul>
         </section>
 
         <section class="section projects">
             <h2>Projects</h2>
             <ul>
-                <li><strong>VR Medical Simulation</strong> – Developed a VR simulation system with haptic feedback.</li>
-                <li><strong>PC Control Project</strong> – Designed a system for controlling a PC remotely using C++.</li>
+                <li><strong>Azure Cloud Infrastructure Deployment</strong> – Built full Azure infrastructure for a web app with VMs, AD, SQL, and backups.</li>
+                <li><strong>Alexa Project</strong> – Integrated Alexa features via Python scripting.</li>
+                <li><strong>PC Control Project</strong> – Desktop control app developed using C++.</li>
             </ul>
         </section>
-        
-        <section class="section contact">
-            <h2>Contact</h2>
+
+        <section class="section certifications">
+            <h2>Certifications</h2>
             <ul>
-                <li><a href="https://github.com/mohamed-sarhan">GitHub</a></li>
-                <li><a href="https://linkedin.com/in/mohamed-sarhan">LinkedIn</a></li>
+                <li>Microsoft Certified: Azure Fundamentals – Certification No: C1733U-8DF16F (June 20, 2025)</li>
+            </ul>
+        </section>
+
+        <section class="section skills">
+            <h2>Technical Skills</h2>
+            <div>
+                <span class="badge">C++</span>
+                <span class="badge">C</span>
+                <span class="badge">Python</span>
+                <span class="badge">Microsoft Azure</span>
+                <span class="badge">Linux Administration</span>
+                <span class="badge">Networking</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Kubernetes</span>
+                <span class="badge">Git</span>
+            </div>
+        </section>
+
+        <section class="section languages">
+            <h2>Languages</h2>
+            <ul>
+                <li>Arabic – Native</li>
+                <li>English – Fluent (Professional Proficiency)</li>
             </ul>
         </section>
     </div>
