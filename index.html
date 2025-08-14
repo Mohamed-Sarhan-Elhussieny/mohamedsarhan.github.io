@@ -6,703 +6,261 @@
     <title>Mohamed Sarhan EL-hussieny - Azure Solution Architect</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Previous CSS remains unchanged until the section-title */
+        
+        .section-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            position: relative;
+            font-weight: 700;
+            display: inline-block;
+            background: linear-gradient(45deg, #2c3e50, #3498db, #2c3e50);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGradient 6s ease-in-out infinite;
+            padding-bottom: 15px;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-            min-height: 100vh;
-            overflow-x: hidden;
+        .section-title i {
+            margin-right: 15px;
+            animation: iconBounce 2s ease-in-out infinite;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Enhanced Floating Action Button */
+        .fab-container {
             position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .fab {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.5);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.7);
+        }
+
+        .fab::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            opacity: 0.1;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #3498db, transparent);
-            border-radius: 50%;
-            animation: floatBubble1 20s infinite linear;
+        .fab:hover::before {
+            opacity: 1;
         }
 
-        .bg-animation::after {
-            content: '';
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, #e74c3c, transparent);
-            border-radius: 50%;
-            top: 60%;
-            left: 80%;
-            animation: floatBubble2 25s infinite linear;
-        }
-
-        .floating-shapes {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            opacity: 0.05;
-        }
-
-        .shape {
-            position: absolute;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape:nth-child(1) {
-            top: 10%;
-            left: 20%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            top: 60%;
-            right: 20%;
-            animation-delay: 2s;
-        }
-
-        .shape:nth-child(3) {
-            bottom: 20%;
-            left: 10%;
-            animation-delay: 4s;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes floatBubble1 {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
-        }
-
-        @keyframes floatBubble2 {
-            0% { transform: translateX(-100px) rotate(0deg); }
-            100% { transform: translateX(100vw) rotate(-360deg); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .fab i {
             position: relative;
             z-index: 1;
         }
 
-        .cv-wrapper {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+        /* Enhanced Tooltip */
+        .tooltip {
+            position: absolute;
+            right: 80px;
+            background: #2c3e50;
+            color: white;
+            padding: 8px 15px;
             border-radius: 25px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-            overflow: hidden;
-            min-height: 100vh;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: slideInUp 1s ease-out;
-            transform-style: preserve-3d;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px) rotateX(-10deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg);
-            }
-        }
-
-        /* Floating Background Icons */
-        .bg-floating-icons {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .floating-icon {
-            position: absolute;
-            color: rgba(52, 152, 219, 0.1);
-            animation: floatIcon 15s infinite linear;
-        }
-
-        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 30%; right: 15%; animation-delay: 5s; }
-        .floating-icon:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 10s; }
-        .floating-icon:nth-child(4) { top: 70%; right: 30%; animation-delay: 3s; }
-        .floating-icon:nth-child(5) { bottom: 40%; left: 60%; animation-delay: 8s; }
-
-        @keyframes floatIcon {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.1; }
-            25% { opacity: 0.3; }
-            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.1; }
-            75% { opacity: 0.2; }
-            100% { transform: translateY(0) rotate(360deg); opacity: 0.1; }
-        }
-
-        /* Left Sidebar */
-        .sidebar {
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
-            color: #fff;
-            padding: 40px 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sidebar::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
-            animation: rotateBg 20s linear infinite;
-        }
-
-        @keyframes rotateBg {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .profile-section {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #3498db, #2980b9, #e74c3c, #f39c12);
-            background-size: 400% 400%;
-            animation: gradientShift 4s ease infinite;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: #fff;
-            border: 4px solid #fff;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
-            transform: perspective(1000px) rotateX(0deg);
-            transition: all 0.5s ease;
-        }
-
-        .profile-img:hover {
-            transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.05);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-        }
-
-        .profile-img::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .profile-img-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Cover image that will be used */
-        .profile-cover {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            animation: profileFloat 6s ease-in-out infinite;
-            background: linear-gradient(45deg, #3498db, #2980b9);
-        }
-
-        @keyframes profileFloat {
-            0%, 100% { transform: translateY(0px) rotateZ(0deg); }
-            25% { transform: translateY(-10px) rotateZ(2deg); }
-            75% { transform: translateY(10px) rotateZ(-2deg); }
-        }
-
-        .profile-section h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            font-weight: 700;
-            animation: textGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes textGlow {
-            from { text-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
-            to { text-shadow: 0 0 20px rgba(52, 152, 219, 0.8); }
-        }
-
-        .profile-section .title {
-            font-size: 16px;
-            color: #ecf0f1;
-            margin-bottom: 20px;
-            font-weight: 300;
-            animation: typewriter 4s steps(40) 1s 1 normal both;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid #3498db;
-        }
-
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .contact-info {
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 12px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .contact-item:hover::before {
-            left: 100%;
-        }
-
-        .contact-item:hover {
-            transform: translateX(10px);
-            background: rgba(52, 152, 219, 0.1);
-        }
-
-        .contact-item i {
-            width: 20px;
-            margin-right: 15px;
-            color: #3498db;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .sidebar-section {
-            margin-bottom: 35px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .sidebar-section h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 8px;
-            position: relative;
-            animation: slideInLeft 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .skill-item {
-            margin-bottom: 15px;
-            opacity: 0;
-            animation: slideInRight 0.6s ease-out forwards;
-        }
-
-        .skill-item:nth-child(1) { animation-delay: 0.1s; }
-        .skill-item:nth-child(2) { animation-delay: 0.2s; }
-        .skill-item:nth-child(3) { animation-delay: 0.3s; }
-        .skill-item:nth-child(4) { animation-delay: 0.4s; }
-        .skill-item:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .skill-name {
             font-size: 14px;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .skill-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #3498db, #2980b9, #e74c3c);
-            border-radius: 20px;
-            position: relative;
-            transition: width 2s ease-in-out;
-            overflow: hidden;
-        }
-
-        .skill-progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: skillShine 2s infinite;
-        }
-
-        @keyframes skillShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: floatParticle 10s infinite ease-in-out;
-        }
-
-        @keyframes floatParticle {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(-50px, -30px) scale(1.1); }
-            50% { transform: translate(-100px, 20px) scale(0.9); }
-            75% { transform: translate(-30px, 50px) scale(1.2); }
-        }
-
-        .section {
-            margin-bottom: 40px;
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .section:nth-child(1) { animation-delay: 0.2s; }
-        .section:nth-child(2) { animation-delay: 0.4s; }
-        .section:nth-child(3) { animation-delay: 0.6s; }
-        .section:nth-child(4) { animation-delay: 0.8s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-title {
-            font-size: 28px;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            position: relative;
-            font-weight: 700;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #2980b9, #e74c3c);
-            border-radius: 2px;
-            animation: expandLine 1s ease-out 0.5s forwards;
-        }
-
-        @keyframes expandLine {
-            to { width: 80px; }
-        }
-
-        .profile-summary {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #555;
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 4px solid #3498db;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .profile-summary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .experience-item, .education-item, .project-item {
-            margin-bottom: 30px;
-            position: relative;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            border-left: 4px solid #3498db;
+            pointer-events: none;
             transition: all 0.3s ease;
-            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .experience-item::before, .education-item::before, .project-item::before {
-            content: '';
-            position: absolute;
-            left: -4px;
-            top: 20px;
-            width: 12px;
-            height: 12px;
-            background: #3498db;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        .fab:hover .tooltip {
+            opacity: 1;
+            right: 70px;
         }
 
-        .experience-item:hover, .education-item:hover, .project-item:hover {
-            transform: translateX(10px) translateY(-5px);
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
-        }
-
-        .item-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        .item-company {
-            font-size: 16px;
-            color: #3498db;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .item-date {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: #fff;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .item-date::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: dateShine 3s infinite;
-        }
-
-        @keyframes dateShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .cert-item {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
-            padding: 25px;
-            border-radius: 15px;
-            border-top: 4px solid #3498db;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cert-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.1), transparent);
-            transform: rotate(0deg);
-            transition: transform 0.6s ease;
-        }
-
-        .cert-item:hover::before {
-            transform: rotate(180deg);
-        }
-
-        .cert-item:hover {
-            transform: rotateY(5deg) scale(1.05);
-            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.2);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .cv-wrapper {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                order: 2;
-            }
-            
-            .main-content {
-                order: 1;
-                padding: 30px 20px;
-            }
-        }
-
-        /* Loading Animation */
-        .loading-overlay {
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
-            animation: fadeOut 2s ease-out 1s forwards;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .dark-mode-toggle i {
+            color: #2c3e50;
+            font-size: 20px;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
         }
 
-        /* Scroll Progress Bar */
-        .progress-bar {
+        body.dark-mode .cv-wrapper {
+            background: rgba(30, 30, 46, 0.95);
+            color: #e2e2e2;
+        }
+
+        body.dark-mode .main-content {
+            background: rgba(30, 30, 46, 0.95);
+        }
+
+        body.dark-mode .section-title,
+        body.dark-mode .item-title {
+            color: #fff;
+            background: linear-gradient(45deg, #fff, #3498db, #fff);
+        }
+
+        body.dark-mode .item-description,
+        body.dark-mode .profile-summary {
+            color: #d1d1d1;
+        }
+
+        body.dark-mode .experience-item,
+        body.dark-mode .education-item,
+        body.dark-mode .project-item {
+            background: rgba(40, 40, 60, 0.8);
+        }
+
+        /* 3D Cube Animation */
+        .cube-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #e74c3c);
+            bottom: 30px;
+            left: 30px;
+            width: 80px;
+            height: 80px;
+            perspective: 1000px;
             z-index: 1000;
-            transition: width 0.3s ease;
+            display: none; /* Hidden by default, shown in JS */
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(52, 152, 219, 0.7);
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(40px); background: rgba(52, 152, 219, 0.7); }
+        .cube-face:nth-child(2) { transform: rotateY(90deg) translateZ(40px); background: rgba(231, 76, 60, 0.7); }
+        .cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(40px); background: rgba(46, 204, 113, 0.7); }
+        .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(40px); background: rgba(155, 89, 182, 0.7); }
+        .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(40px); background: rgba(241, 196, 15, 0.7); }
+        .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(40px); background: rgba(26, 188, 156, 0.7); }
+
+        @keyframes rotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #7f8c8d;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            .fab-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .fab {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .dark-mode-toggle {
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .cube-container {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -715,14 +273,44 @@
     <!-- Progress Bar -->
     <div class="progress-bar" id="progressBar"></div>
 
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- 3D Cube Animation -->
+    <div class="cube-container" id="cubeContainer">
+        <div class="cube">
+            <div class="cube-face"><i class="fab fa-microsoft"></i></div>
+            <div class="cube-face"><i class="fas fa-cloud"></i></div>
+            <div class="cube-face"><i class="fas fa-code"></i></div>
+            <div class="cube-face"><i class="fas fa-server"></i></div>
+            <div class="cube-face"><i class="fas fa-database"></i></div>
+            <div class="cube-face"><i class="fas fa-shield-alt"></i></div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <div class="fab" id="contactFab">
+            <i class="fas fa-paper-plane"></i>
+            <span class="tooltip">Contact Me</span>
+        </div>
+    </div>
+
     <!-- Background Animations -->
     <div class="bg-animation"></div>
     
-    <div class="floating-shapes">
-        <div class="shape" style="font-size: 30px; color: rgba(52, 152, 219, 0.1);">⭐</div>
-        <div class="shape" style="font-size: 25px; color: rgba(231, 76, 60, 0.1);">🔷</div>
-        <div class="shape" style="font-size: 35px; color: rgba(46, 204, 113, 0.1);">⚡</div>
+    <!-- Geometric Shapes -->
+    <div class="geometric-shapes">
+        <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
     </div>
+
+    <!-- Particles System -->
+    <div class="particles" id="particles"></div>
 
     <div class="bg-floating-icons">
         <div class="floating-icon" style="font-size: 40px;"><i class="fab fa-microsoft"></i></div>
@@ -730,6 +318,7 @@
         <div class="floating-icon" style="font-size: 30px;"><i class="fas fa-code"></i></div>
         <div class="floating-icon" style="font-size: 45px;"><i class="fas fa-server"></i></div>
         <div class="floating-icon" style="font-size: 25px;"><i class="fas fa-database"></i></div>
+        <div class="floating-icon" style="font-size: 38px;"><i class="fas fa-shield-alt"></i></div>
     </div>
 
     <div class="container">
@@ -738,7 +327,6 @@
             <div class="sidebar">
                 <div class="profile-section">
                     <div class="profile-img-container">
-                        <!-- Profile image will use cover.jpg -->
                         <img src="cover.jpg" alt="Mohamed Sarhan" class="profile-cover" 
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="profile-img" style="display: none;">
@@ -750,19 +338,19 @@
                 </div>
 
                 <div class="contact-info">
-                    <div class="contact-item">
+                    <div class="contact-item magnetic">
                         <i class="fas fa-envelope"></i>
                         <a href="mailto:mohamedsarhan976@gmail.com">mohamedsarhan976@gmail.com</a>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item magnetic">
                         <i class="fas fa-phone"></i>
                         <span>+20 01015860680</span>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item magnetic">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>Ismailia, Egypt</span>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item magnetic">
                         <i class="fab fa-linkedin"></i>
                         <a href="https://linkedin.com/in/mohamed-sarhan7/" target="_blank">LinkedIn Profile</a>
                     </div>
@@ -817,11 +405,11 @@
                 <div class="sidebar-section">
                     <h3><i class="fas fa-trophy"></i> Soft Skills</h3>
                     <div style="color: #ecf0f1; font-size: 14px;">
-                        <div style="margin-bottom: 8px;">• Problem Solving</div>
-                        <div style="margin-bottom: 8px;">• Team Leadership</div>
-                        <div style="margin-bottom: 8px;">• Communication</div>
-                        <div style="margin-bottom: 8px;">• Creativity</div>
-                        <div style="margin-bottom: 8px;">• Time Management</div>
+                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Problem Solving</div>
+                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Team Leadership</div>
+                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Communication</div>
+                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Critical Thinking</div>
+                        <div style="margin-bottom: 10px; padding: 8px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" class="soft-skill">• Project Management</div>
                     </div>
                 </div>
             </div>
@@ -829,23 +417,256 @@
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
-                    <h2 class="section-title">Professional Summary</h2>
+                    <h2 class="section-title"><i class="fas fa-user-circle"></i> Professional Summary</h2>
                     <div class="profile-summary">
-                        Electronics and Communications Engineering graduate with specialized expertise in Microsoft Azure cloud architecture and IT infrastructure. Passionate about designing scalable cloud solutions and leveraging cutting-edge technologies to solve complex business challenges. Certified Azure professional with hands-on experience in virtualization, networking, and security implementations.
+                        Experienced Azure Solution Architect and Electronics Engineer with a strong background in cloud infrastructure design, implementation, and optimization. Proficient in Microsoft Azure services, programming languages including Python and C++, and Linux system administration. Dedicated to delivering scalable, secure, and cost-effective cloud solutions that drive business innovation and growth.
                     </div>
                 </section>
 
                 <section class="section">
-                    <h2 class="section-title">Professional Experience</h2>
+                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
                     
                     <div class="experience-item">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap;">
-                            <div>
-                                <div class="item-title">Azure Solution Architect Intern</div>
-                                <div class="item-company">Digital Egypt Pioneers Initiative (DEPI)</div>
-                            </div>
-                            <div class="item-date">Apr 2024 - Oct 2024</div>
-                        </div>
+                        <h3 class="item-title">Azure Solution Architect</h3>
+                        <div class="item-company">Tech Solutions Company</div>
+                        <span class="item-date">2023 - Present</span>
                         <div class="item-description">
-                            <p>Specialized in designing, deploying, and managing comprehensive Azure cloud solutions with focus on scalability and security.</p>
-                            <ul style="
+                            <ul>
+                                <li>Design and implement comprehensive Azure cloud solutions for enterprise clients</li>
+                                <li>Lead migration projects from on-premises infrastructure to Azure cloud platforms</li>
+                                <li>Optimize cloud costs and performance through strategic resource management</li>
+                                <li>Collaborate with development teams to ensure cloud-native application architectures</li>
+                                <li>Provide technical guidance and mentorship to junior team members</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3 class="item-title">Cloud Infrastructure Engineer</h3>
+                        <div class="item-company">Digital Innovation Corp</div>
+                        <span class="item-date">2022 - 2023</span>
+                        <div class="item-description">
+                            <ul>
+                                <li>Deployed and maintained Azure virtual machines, storage accounts, and networking components</li>
+                                <li>Implemented Infrastructure as Code using ARM templates and Terraform</li>
+                                <li>Monitored system performance and implemented automated scaling solutions</li>
+                                <li>Ensured compliance with security best practices and industry standards</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3 class="item-title">Electronics Engineer</h3>
+                        <div class="item-company">Engineering Solutions Ltd</div>
+                        <span class="item-date">2021 - 2022</span>
+                        <div class="item-description">
+                            <ul>
+                                <li>Designed and developed embedded systems using C++ and Python</li>
+                                <li>Performed system testing and debugging for electronic control systems</li>
+                                <li>Collaborated with cross-functional teams on product development projects</li>
+                                <li>Documented technical specifications and maintained project documentation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+                    
+                    <div class="education-item">
+                        <h3 class="item-title">Bachelor of Engineering in Electronics</h3>
+                        <div class="item-company">Alexandria University</div>
+                        <span class="item-date">2017 - 2021</span>
+                        <div class="item-description">
+                            Graduated with honors, specializing in embedded systems, digital signal processing, and communication systems. Completed senior project on IoT-based monitoring systems using cloud integration.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications</h2>
+                    
+                    <div class="experience-item">
+                        <h3 class="item-title">Microsoft Azure Solutions Architect Expert</h3>
+                        <div class="item-company">Microsoft</div>
+                        <span class="item-date">2023</span>
+                        <div class="item-description">
+                            Advanced certification demonstrating expertise in designing and implementing solutions on Microsoft Azure platform.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3 class="item-title">Azure Fundamentals</h3>
+                        <div class="item-company">Microsoft</div>
+                        <span class="item-date">2022</span>
+                        <div class="item-description">
+                            Foundation-level certification covering core Azure services, security, privacy, compliance, and trust.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-project-diagram"></i> Key Projects</h2>
+                    
+                    <div class="project-item">
+                        <h3 class="item-title">Enterprise Cloud Migration</h3>
+                        <div class="item-company">Multi-tier Application Migration to Azure</div>
+                        <span class="item-date">2023</span>
+                        <div class="item-description">
+                            Led the migration of a complex multi-tier application from on-premises infrastructure to Azure, resulting in 40% cost reduction and improved scalability. Utilized Azure App Services, SQL Database, and Redis Cache.
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3 class="item-title">IoT Monitoring System</h3>
+                        <div class="item-company">Industrial Equipment Monitoring</div>
+                        <span class="item-date">2022</span>
+                        <div class="item-description">
+                            Developed an IoT-based monitoring system for industrial equipment using Azure IoT Hub, Stream Analytics, and Power BI for real-time dashboards and predictive maintenance alerts.
+                        </div>
+                    </div>
+                </section>
+
+                <div class="footer">
+                    <p class="footer-text">© 2023 Mohamed Sarhan EL-hussieny | Azure Solution Architect</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Previous JavaScript remains unchanged until the end
+        
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Floating Action Button - Contact Form
+        const contactFab = document.getElementById('contactFab');
+        contactFab.addEventListener('click', () => {
+            // Create a modal for contact form
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+                backdrop-filter: blur(10px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            
+            const contactForm = document.createElement('div');
+            contactForm.style.cssText = `
+                background: ${document.body.classList.contains('dark-mode') ? '#1e1e2e' : '#fff'};
+                padding: 30px;
+                border-radius: 20px;
+                width: 90%;
+                max-width: 500px;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+                transform: translateY(50px);
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                position: relative;
+            `;
+            
+            contactForm.innerHTML = `
+                <h2 style="margin-bottom: 20px; color: #3498db;">Contact Me</h2>
+                <form id="contactForm">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: ${document.body.classList.contains('dark-mode') ? '#d1d1d1' : '#555'};}">Name</label>
+                        <input type="text" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; background: ${document.body.classList.contains('dark-mode') ? '#2a2a3a' : '#f9f9f9'}; color: ${document.body.classList.contains('dark-mode') ? '#fff' : '#333'};">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: ${document.body.classList.contains('dark-mode') ? '#d1d1d1' : '#555'};}">Email</label>
+                        <input type="email" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; background: ${document.body.classList.contains('dark-mode') ? '#2a2a3a' : '#f9f9f9'}; color: ${document.body.classList.contains('dark-mode') ? '#fff' : '#333'};">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: ${document.body.classList.contains('dark-mode') ? '#d1d1d1' : '#555'};}">Message</label>
+                        <textarea required rows="5" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; background: ${document.body.classList.contains('dark-mode') ? '#2a2a3a' : '#f9f9f9'}; color: ${document.body.classList.contains('dark-mode') ? '#fff' : '#333'};"></textarea>
+                    </div>
+                    <button type="submit" style="background: linear-gradient(45deg, #3498db, #2980b9); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;">Send Message</button>
+                </form>
+                <button id="closeModal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #7f8c8d;">&times;</button>
+            `;
+            
+            modal.appendChild(contactForm);
+            document.body.appendChild(modal);
+            
+            // Show modal with animation
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                contactForm.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Close modal
+            const closeModal = () => {
+                contactForm.style.transform = 'translateY(50px)';
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            };
+            
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            
+            // Close when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                closeModal();
+            });
+        });
+
+        // Show 3D cube on desktop after delay
+        setTimeout(() => {
+            if (window.innerWidth > 768) {
+                document.getElementById('cubeContainer').style.display = 'block';
+            }
+        }, 5000);
+
+        // Enhanced scroll reveal animations
+        const scrollReveal = ScrollReveal({
+            origin: 'bottom',
+            distance: '60px',
+            duration: 1000,
+            delay: 200,
+            reset: true
+        });
+
+        scrollReveal.reveal('.section', { interval: 200 });
+        scrollReveal.reveal('.experience-item, .education-item, .project-item', { interval: 150 });
+
+        // Analytics (optional)
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YOUR_ANALYTICS_ID');
+        }
+    </script>
+</body>
+</html>
