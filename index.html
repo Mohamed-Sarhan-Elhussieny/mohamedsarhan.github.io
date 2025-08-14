@@ -316,15 +316,19 @@
             font-weight: 400;
             letter-spacing: 0.5px;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            white-space: normal;
+            word-wrap: break-word;
+            line-height: 1.4;
         }
 
         .typing-animation {
             border-right: 2px solid #64c8ff;
-            white-space: nowrap;
-            overflow: hidden;
+            white-space: normal;
+            overflow: visible;
+            word-wrap: break-word;
             animation: 
-                typing 4s steps(40) 1s 1 normal both,
+                typing 4s steps(50) 1s 1 normal both,
                 blink-caret 1s step-end infinite 5s;
         }
 
@@ -1242,7 +1246,7 @@
                         </div>
                     </div>
                     <h1>Mohamed Sarhan EL-hussieny</h1>
-                    <div class="title typing-animation">Azure Solution Architect & Electronics Engineer</div>
+                    <div class="title">Azure Solution Architect & Electronics Engineer</div>
                 </div>
 
                 <div class="contact-info">
@@ -1587,10 +1591,10 @@
 
         // Enhanced Typing Animation
         function typeWriterEffect() {
-            const element = document.querySelector('.typing-animation');
-            const text = element.textContent;
+            const element = document.querySelector('.profile-section .title');
+            const text = 'Azure Solution Architect & Electronics Engineer';
             element.textContent = '';
-            element.style.width = '0';
+            element.classList.add('typing-animation');
             
             let i = 0;
             const typeInterval = setInterval(() => {
@@ -1601,9 +1605,10 @@
                     clearInterval(typeInterval);
                     setTimeout(() => {
                         element.style.borderRight = 'none';
+                        element.classList.remove('typing-animation');
                     }, 2000);
                 }
-            }, 80);
+            }, 60);
         }
 
         // Start typing animation after loading
